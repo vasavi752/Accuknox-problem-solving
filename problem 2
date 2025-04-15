@@ -1,0 +1,22 @@
+problem Statement 2: Kubernetes Security Scan
+Objective: Use a Kubernetes cluster and a tool (like Kubescape) to scan and output vulnerabilities.
+
+Steps:
+1.Install a K8s cluster:
+
+Minikube: minikube start
+
+Kind: kind create cluster
+
+2.Install Kubescape:
+
+curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | /bin/bash
+
+3.Run scan:
+
+kubescape scan framework nsa --output json > findings.json
+
+4.Deliverable:
+
+Upload findings.json to GitHub
+

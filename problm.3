@@ -1,0 +1,77 @@
+Step 1: Create GoLang App
+
+main.go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	currentTime := time.Now().Format("2006-01-02 15:04:05")
+	fmt.Fprintf(w, "Current Date and Time: %s", currentTime)
+}
+
+func main() {
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":8080", nil)
+}
+
+
+Dockerfile:
+
+FROM golang:1.19-alpine
+WORKDIR /app
+COPY . .
+RUN go build -o main .
+EXPOSE 8080
+CMD ["./main"]
+
+
+Push to DockerHub:
+
+docker build -t <your-dockerhub-username>/go-time-app .
+docker push <your-dockerhub-username>/go-time-app
+
+Step 2: Deploy to Kubernetes
+Create deployment.yaml:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-time-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: go-time
+  template:
+    metadata:
+      labels:
+        app: go-time
+    spec:
+      containers:
+      - name: go-time
+        image: <your-dockerhub-username>/go-time-app
+        ports:
+        - containerPort: 8080
+
+
+Step 3: Expose App
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-time-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: go-time
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+

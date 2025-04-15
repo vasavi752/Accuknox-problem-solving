@@ -1,0 +1,32 @@
+Problem Statement 1: Product Requirement and Low-Fidelity Wireframes
+Objective: Build a requirements document and UI wireframes for a security product that scans container images.
+
+Deliverables:
+Product Requirements Document (PRD):
+
+Description of the product
+
+User stories (e.g., "As a user, I want to see all vulnerable images in my repo.")
+
+Functional requirements
+
+Non-functional requirements
+
+Technical constraints
+
+Low-Fidelity Wireframes:
+
+Use tools like Balsamiq, Figma, or even hand-drawn mockups
+
+Show:
+
+Dashboard with list of images
+
+Filters for severity (Low/Medium/High)
+
+Details page for individual image scan
+
+(Optional) Development Action Items:
+
+Define what features dev team should start with (e.g., “Implement API to fetch vulnerabilities”).
+
